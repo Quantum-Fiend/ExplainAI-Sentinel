@@ -1,0 +1,37 @@
+version: 2
+updates:
+  # Go Runtime
+  - package-ecosystem: "gomod"
+    directory: "/runtime"
+    schedule:
+      interval: "weekly"
+
+  # Python AI Engine
+  - package-ecosystem: "pip"
+    directory: "/ai-engine"
+    schedule:
+      interval: "weekly"
+
+  # Java Networking
+  - package-ecosystem: "maven"
+    directory: "/networking"
+    schedule:
+      interval: "weekly"
+
+  # Rust Policy Engine
+  - package-ecosystem: "cargo"
+    directory: "/policy-engine"
+    schedule:
+      interval: "weekly"
+
+  # Dashbord (TS/React)
+  - package-ecosystem: "npm"
+    directory: "/dashboard"
+    schedule:
+      interval: "weekly"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

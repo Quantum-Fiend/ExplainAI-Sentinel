@@ -1,0 +1,49 @@
+# Default values for explainai-sentinel.
+# This is a YAML-formatted file.
+
+global:
+  namespace: explainai-sentinel
+  registry: ghcr.io/explainai-sentinel
+
+# Standard resource limits for services
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+
+# Service-specific overrides
+runtime:
+  replicas: 2
+  port: 8000
+ai_engine:
+  replicas: 2
+  port: 8001
+knowledge_graph:
+  replicas: 1
+  port: 8002
+policy_engine:
+  replicas: 2
+  port: 8003
+networking:
+  replicas: 2
+  port: 8080
+logging:
+  replicas: 1
+  port: 8082
+dashboard:
+  replicas: 1
+  port: 80
+
+# Infrastructure
+postgresql:
+  enabled: true
+  password: secure_password_123
+
+redis:
+  enabled: true
+
+neo4j:
+  enabled: true

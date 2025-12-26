@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-pipeline
+  namespace: explainai-sentinel
+  labels:
+    app: data-pipeline
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: data-pipeline
+  template:
+    metadata:
+      labels:
+        app: data-pipeline
+    spec:
+      containers:
+      - name: data-pipeline
+        image: explainai-sentinel/data-pipeline:latest
+        ports:
+        - containerPort: 8083
+        env:
+        - name: SERVICE_NAME
+          value: data-pipeline
+        - name: PORT
+          value: "8083"
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka:9092"
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 500m
+          limits:
+            memory: 1Gi
+            cpu: 1000m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-pipeline
+  namespace: explainai-sentinel
+  labels:
+    app: data-pipeline
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8083
+    targetPort: 8083
+  selector:
+    app: data-pipeline

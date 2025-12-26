@@ -1,0 +1,8 @@
+# ExplainAI-Sentinel Runtime Configuration
+server:
+  port: 8000
+  host: 0.0.0.0
+registry:
+  cleanup_interval: 30s
+  expiry_timeout: 60s
+log_level: info

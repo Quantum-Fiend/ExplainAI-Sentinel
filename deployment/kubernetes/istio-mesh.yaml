@@ -1,0 +1,48 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: sentinel-gateway
+  namespace: explainai-sentinel
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sentinel-vs
+  namespace: explainai-sentinel
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - sentinel-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/v1/runtime
+    route:
+    - destination:
+        host: runtime
+        port:
+          number: 8000
+  - match:
+    - uri:
+        prefix: /api/v1/ai
+    route:
+    - destination:
+        host: ai-engine
+        port:
+          number: 8001
+  - route:
+    - destination:
+        host: dashboard
+        port:
+          number: 80

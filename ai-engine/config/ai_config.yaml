@@ -1,0 +1,101 @@
+ai_engine:
+  name: "ExplainAI Security Engine"
+  version: "1.0.0"
+  
+  # Model Configuration
+  models:
+    anomaly_detection:
+      enabled: true
+      algorithms:
+        - isolation_forest
+        - autoencoder
+        - lstm_vae
+        - one_class_svm
+      ensemble_voting: "soft"
+      confidence_threshold: 0.75
+      
+    threat_classification:
+      enabled: true
+      model_type: "gradient_boosting"
+      features: ["network_metrics", "system_metrics", "behavioral_patterns"]
+      update_frequency: "hourly"
+      
+    behavioral_analysis:
+      enabled: true
+      window_size: 300  # seconds
+      baseline_learning_period: 86400  # 24 hours
+      
+  # Explainability Configuration
+  explainability:
+    enabled: true
+    methods:
+      shap:
+        enabled: true
+        background_samples: 100
+        max_evals: 1000
+      lime:
+        enabled: true
+        num_features: 10
+        num_samples: 5000
+      counterfactual:
+        enabled: true
+        max_iterations: 100
+        
+    output_format: "json"
+    include_visualizations: true
+    confidence_scores: true
+    
+  # Federated Learning
+  federated_learning:
+    enabled: true
+    strategy: "FedAvg"
+    num_rounds: 10
+    min_clients: 3
+    fraction_fit: 0.5
+    fraction_evaluate: 0.5
+    privacy:
+      differential_privacy: true
+      epsilon: 1.0
+      delta: 1e-5
+      secure_aggregation: true
+      
+  # Causal Reasoning
+  causal_reasoning:
+    enabled: true
+    graph_update_interval: 300  # seconds
+    max_graph_nodes: 10000
+    inference_engine: "dowhy"
+    
+  # Real-time Processing
+  streaming:
+    batch_size: 32
+    max_latency_ms: 100
+    buffer_size: 1000
+    
+  # Model Management
+  model_registry:
+    path: "./models"
+    auto_versioning: true
+    retention_policy: "keep_last_5"
+    
+  # Performance
+  performance:
+    use_gpu: true
+    num_workers: 4
+    prefetch_factor: 2
+    mixed_precision: true
+    
+  # Monitoring
+  monitoring:
+    metrics_port: 9091
+    log_predictions: true
+    track_drift: true
+    alert_on_degradation: true
+    
+  # API Configuration
+  api:
+    host: "0.0.0.0"
+    port: 8001
+    workers: 4
+    timeout: 30
+    max_requests: 1000

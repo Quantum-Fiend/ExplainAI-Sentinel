@@ -1,0 +1,39 @@
+{{- range $name, $config := .Values }}
+{{- if and (hasKey $config "replicas") (hasKey $config "port") }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name | replace "_" "-" }}
+  namespace: {{ $.Values.global.namespace }}
+spec:
+  replicas: {{ $config.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $name | replace "_" "-" }}
+  template:
+    metadata:
+      labels:
+        app: {{ $name | replace "_" "-" }}
+    spec:
+      containers:
+      - name: {{ $name | replace "_" "-" }}
+        image: "{{ $.Values.global.registry }}/{{ $name | replace "_" "-" }}:latest"
+        ports:
+        - containerPort: {{ $config.port }}
+        resources:
+          {{- toYaml $.Values.resources | nindent 10 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name | replace "_" "-" }}
+  namespace: {{ $.Values.global.namespace }}
+spec:
+  ports:
+  - port: {{ $config.port }}
+    targetPort: {{ $config.port }}
+  selector:
+    app: {{ $name | replace "_" "-" }}
+{{- end }}
+{{- end }}

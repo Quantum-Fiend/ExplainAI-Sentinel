@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging
+  namespace: explainai-sentinel
+  labels:
+    app: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logging
+  template:
+    metadata:
+      labels:
+        app: logging
+    spec:
+      containers:
+      - name: logging
+        image: explainai-sentinel/logging:latest
+        ports:
+        - containerPort: 8082
+        env:
+        - name: SERVICE_NAME
+          value: logging
+        - name: PORT
+          value: "8082"
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging
+  namespace: explainai-sentinel
+  labels:
+    app: logging
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8082
+    targetPort: 8082
+  selector:
+    app: logging

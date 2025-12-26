@@ -1,0 +1,54 @@
+[package]
+name = "policy-engine"
+version = "1.0.0"
+edition = "2021"
+authors = ["ExplainAI-Sentinel Team"]
+description = "High-performance policy engine with DSL and constraint solving"
+
+[dependencies]
+# Core
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+
+# Web framework
+axum = "0.7"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+
+# Parsing
+pest = "2.7"
+pest_derive = "2.7"
+
+# Constraint solving
+z3 = { version = "0.12", features = ["static-link-z3"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Metrics
+prometheus = "0.13"
+
+# Utilities
+lazy_static = "1.4"
+dashmap = "5.5"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "policy_evaluation"
+harness = false

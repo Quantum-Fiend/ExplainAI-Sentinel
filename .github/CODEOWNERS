@@ -1,0 +1,22 @@
+# ExplainAI-Sentinel Code Owners
+
+# Core Orchestration
+/runtime @explainai/go-team
+
+# Intelligence Layer
+/ai-engine @explainai/ai-team
+/knowledge-graph @explainai/scala-team
+/policy-engine @explainai/rust-team
+
+# Ingest & Data
+/networking @explainai/java-team
+/logging @explainai/c-team
+/data-pipeline @explainai/kotlin-team
+
+# Frontend
+/dashboard @explainai/frontend-team
+
+# Infrastructure & DevOps
+/deployment @explainai/devops-team
+.github/workflows/ @explainai/devops-team
+/Makefile @explainai/devops-team
