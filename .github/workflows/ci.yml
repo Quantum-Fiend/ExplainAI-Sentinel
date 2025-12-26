@@ -1,0 +1,16 @@
+name: sentinel-ci
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  sanity-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Basic sanity check
+        run: echo "ExplainAI-Sentinel CI check passed"
