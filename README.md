@@ -117,5 +117,5 @@ make deploy-helm
 ---
 
 <div align="center">
-  <sub>Made with ❤️ by the ExplainAI-Sentinel Team. <i>Securing the Future with Transparence.</i></sub>
+  <sub>Made with ❤️ by Tushar<i>Securing the Future with Transparence.</i></sub>
 </div>
